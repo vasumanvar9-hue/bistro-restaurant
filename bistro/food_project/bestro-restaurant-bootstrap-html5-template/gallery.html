@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bistro Restaurant</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet" />
+
+<style>
+/* FIX IMAGE LAYOUT */
+.portfolio {
+  clear: both;
+}
+
+/* IMAGE STYLE */
+.item-thumbs img {
+  width: 100%;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+/* NEW HOVER EFFECT */
+.item-thumbs:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* REMOVE OLD OVERLAY EFFECT */
+.overlay-img,
+.hover-wrap {
+  display: none !important;
+}
+
+/* FOOD TEXT */
+.food-actions {
+  text-align: center;
+  margin-top: 8px;
+}
+
+</style>
+</head>
+
+<body>
+<div id="wrapper">
+
+<!-- HEADER -->
+<header>
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <img src="img/logo.png" style="height:40px;">
+        </a>
+      </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Order</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#" onclick="adminAccess()">Admin Login</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+<section id="inner-headline">
+  <div class="container">
+    <h2 class="pageTitle">Order Food</h2>
+  </div>
+</section>
+
+<section id="content">
+<div class="container">
+
+
+
+<div class="row">
+<section id="projects">
+<ul id="thumbs" class="portfolio">
+
+<!-- ITEM 1 -->
+<li class="item-thumbs col-lg-3" data-type="web">
+  <img src="img/works/1.jpg" alt="Mexican Burger">
+
+  <div class="food-actions">
+    <strong>Mexican Burger</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Mexican Burger"
+	data-price="150">
+	Add to Cart
+	</button>
+	<span>₹150</span>
+
+
+  </div>
+</li>
+
+
+<!-- ITEM 2 -->
+<li class="item-thumbs col-lg-3 design" data-type="icon">
+  <a class="hover-wrap fancybox" href="img/works/2.jpg">
+    <span class="overlay-img"></span>
+  </a>
+  <img src="img/works/2.jpg" alt="">
+  <div class="food-actions">
+    <strong>Asian Pizza</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Asian Pizza"
+	data-price="220">
+	Add to Cart
+	</button>
+	<span>₹220</span>
+
+  </div>
+</li>
+
+<!-- ITEM 3 -->
+<li class="item-thumbs col-lg-3 photography" data-type="graphic">
+  <a class="hover-wrap fancybox" href="img/works/3.jpg">
+    <span class="overlay-img"></span>
+  </a>
+  <img src="img/works/3.jpg" alt="">
+  <div class="food-actions">
+    <strong>Pizza</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Pizza"
+	data-price="300">
+	Add to Cart
+	</button>
+	<span>₹300</span>
+
+  </div>
+</li>
+
+<!-- ITEM 4 -->
+<li class="item-thumbs col-lg-3 design" data-type="web">
+  <a class="hover-wrap fancybox" href="img/works/4.jpg">
+    <span class="overlay-img"></span>
+  </a>
+  <img src="img/works/4.jpg" alt="">
+  <div class="food-actions">
+    <strong>Grilled Chicken</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Grilled Chicken"
+	data-price="450">
+	Add to Cart
+	</button>
+	<span>₹450</span>
+
+  </div>
+</li>
+
+<!-- ITEM 5 -->
+<li class="item-thumbs col-lg-3 photography" data-type="web">
+  <a class="hover-wrap fancybox" href="img/works/5.jpg">
+    <span class="overlay-img"></span>
+  </a>
+  <img src="img/works/5.jpg" alt="">
+  <div class="food-actions">
+    <strong>Strawberry Ice Cream</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Strawberry Ice Cream"
+	data-price="150">
+	Add to Cart
+	</button>
+	<span>₹150</span>
+
+  </div>
+</li>
+
+<!-- ITEM 6 -->
+<li class="item-thumbs col-lg-3 photography" data-type="icon">
+  <a class="hover-wrap fancybox" href="img/works/6.jpg">
+    <span class="overlay-img"></span>
+  </a>
+  <img src="img/works/6.jpg" alt="">
+  <div class="food-actions">
+    <strong>Chicken Burger</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Chicken Burger"
+	data-price="180">
+	Add to Cart
+	</button>
+	<span>₹180</span>
+
+  </div>
+</li>
+
+<!-- ITEM 7 -->
+<li class="item-thumbs col-lg-3 design" data-type="graphic">
+  <a class="hover-wrap fancybox" href="img/works/7.jpg">
+    <span class="overlay-img"></span>
+  </a>
+  <img src="img/works/7.jpg" alt="">
+  <div class="food-actions">
+    <strong>Brownie</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Brownie"
+	data-price="100">
+	Add to Cart
+	</button>
+	<span>₹100</span>
+
+  </div>
+</li>
+
+<!-- ITEM 8 -->
+<li class="item-thumbs col-lg-3 design" data-type="web">
+  <a class="hover-wrap fancybox" href="img/works/8.jpg">
+    <span class="overlay-img"></span>
+  </a>
+  <img src="img/works/8.jpg" alt="">
+  <div class="food-actions">
+    <strong>Salad Bowl</strong><br>
+    <button class="btn btn-success btn-xs add-cart"
+	data-name="Salad Bowl"
+	data-price="165">
+	Add to Cart
+	</button>
+	<span>₹165</span>
+
+  </div>
+  
+</li>
+
+</ul>
+</section>
+</div>
+
+<!-- CART -->
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-8">
+    <div class="cart-box">
+      <h4>🛒 Cart</h4>
+      <div id="cart-items">
+        <p>No items in cart</p>
+      </div>
+    </div>
+  </div>
+  <div id="cart-total" style="margin-top:10px;font-weight:bold;"></div>
+
+	<button id="placeOrderBtn"
+	class="btn btn-success btn-block"
+	style="margin-top:10px; display:none;">
+	Place Order
+	</button>
+
+
+</div>
+
+</div>
+</section>
+
+</div>
+
+<!-- JS -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+let cart = [];
+
+/* ADD TO CART */
+$(document).on("click", ".add-cart", function () {
+  let name = $(this).data("name");
+  let price = parseInt($(this).data("price"));
+
+  // check if item already exists
+  let existing = cart.find(item => item.name === name);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+
+  renderCart();
+});
+
+/* RENDER CART */
+function renderCart() {
+  let html = "";
+  let total = 0;
+
+  if (cart.length === 0) {
+    $("#cart-items").html("<p>No items in cart</p>");
+    $("#cart-total").html("");
+    $("#placeOrderBtn").hide();
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    let itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    html += `
+      <div class="cart-item">
+        <strong>${item.name}</strong><br>
+        <span>₹${item.price}</span>
+        <button class="btn btn-xs btn-default"
+          onclick="updateQty(${index}, -1)">−</button>
+        <span>${item.qty}</span>
+        <button class="btn btn-xs btn-default"
+          onclick="updateQty(${index}, 1)">+</button>
+
+        <span class="pull-right">₹${itemTotal}</span>
+      </div>
+    `;
+  });
+
+  $("#cart-items").html(html);
+  $("#cart-total").html("Total: ₹" + total);
+  $("#placeOrderBtn").show();
+}
+
+/* UPDATE QUANTITY */
+function updateQty(index, change) {
+  cart[index].qty += change;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  renderCart();
+}
+
+/* PLACE ORDER */
+$("#placeOrderBtn").click(function () {
+  localStorage.setItem("bistro_cart", JSON.stringify(cart));
+  window.location.href = "checkout.html";
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Track Order - Bistro</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <img src="img/logo.png" style="height:40px;">
+        </a>
+      </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Order</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#" onclick="adminAccess()">Admin Login</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<div class="container" style="max-width:500px;margin-top:40px;">
+<h3>📦 Track Your Order</h3>
+
+<input type="number" id="orderId" class="form-control" placeholder="Enter Order ID">
+<br>
+<button class="btn btn-success btn-block" onclick="track()">Track</button>
+
+<div id="result" style="margin-top:20px;"></div>
+</div>
+
+<script>
+function track(){
+  let id = document.getElementById("orderId").value;
+
+  fetch(`http://127.0.0.1:5000/track-order/${id}`)
+  .then(res => res.json())
+  .then(data => {
+    if(data.error){
+      document.getElementById("result").innerHTML = "❌ Order not found";
+    } else {
+      document.getElementById("result").innerHTML = `
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Total:</strong> ₹${data.total}</p>
+        <p><strong>Status:</strong> <b>${data.status}</b></p>
+      `;
+    }
+  });
+}
+</script>
+
+</body>
+</html>

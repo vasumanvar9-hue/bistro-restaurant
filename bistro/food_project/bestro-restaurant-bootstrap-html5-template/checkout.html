@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Checkout - Bistro</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+
+<style>
+.checkout-box {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  border: 2px solid #28a745;
+  background: #f9fff9;
+}
+
+.order-item {
+  border-bottom: 1px dashed #ccc;
+  padding: 6px 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<!-- STANDARD HEADER -->
+<header>
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <img src="img/logo.png" style="height:40px;">
+        </a>
+      </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Order</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="admin-login.html" onclick="adminAccess()">Admin Login</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>
+<div class="container">
+<div class="checkout-box">
+
+<h3 class="text-center">🚚 Delivery Details</h3>
+
+<form id="orderForm">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" id="name" required>
+  </div>
+
+  <div class="form-group">
+    <label>Phone</label>
+    <input type="text" class="form-control" id="phone" required>
+  </div>
+
+  <div class="form-group">
+    <label>Address</label>
+    <textarea class="form-control" id="address" required></textarea>
+  </div>
+
+  <h4>Your Order</h4>
+  <div id="order-items"></div>
+
+  <h4 id="order-total"></h4>
+
+  <button type="submit" class="btn btn-success btn-block">
+    Confirm Order
+  </button>
+</form>
+
+</div>
+</div>
+
+<script>
+/* LOAD CART */
+const cart = JSON.parse(localStorage.getItem("bistro_cart")) || [];
+
+let itemsHtml = "";
+let total = 0;
+
+cart.forEach(item => {
+  const itemTotal = item.price * item.qty;
+  total += itemTotal;
+
+  itemsHtml += `
+    <div class="order-item">
+      ${item.name} × ${item.qty}
+      <span class="pull-right">₹${itemTotal}</span>
+    </div>
+  `;
+});
+
+document.getElementById("order-items").innerHTML = itemsHtml;
+document.getElementById("order-total").innerText = "Total: ₹" + total;
+
+/* SUBMIT ORDER */
+document.getElementById("orderForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // ⛔ stop normal form submit
+
+  const payload = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    address: document.getElementById("address").value,
+    items: cart
+  };
+
+  fetch("http://127.0.0.1:5000/place-order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Server error");
+    }
+    return response.json();
+  })
+  .then(data => {
+    localStorage.setItem("last_order", JSON.stringify({
+        items: cart,
+        total: total
+    }));
+
+    <!-- localStorage.removeItem("bistro_cart"); -->
+    window.location.href = "order-success.html";
+    })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("Order failed. Please try again.");
+  });
+});
+function adminAccess(){
+  if(localStorage.getItem("admin_logged_in") === "true"){
+    window.location.href = "admin.html";
+  } else {
+    window.location.href = "admin-login.html";
+  }
+}
+</script>
+
+</body>
+</html>
