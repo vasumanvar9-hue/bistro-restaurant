@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin Dashboard | Bistro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<script>
+/* SIMPLE ADMIN PROTECTION */
+if(localStorage.getItem("admin_logged_in") !== "true"){
+  window.location.href = "admin-login.html";
+} 
+</script>
+
+<style>
+body {
+  background: #f4f6f9;
+}
+
+.order-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.order-card h4 {
+  margin-top: 0;
+}
+
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.Pending { background: #f0ad4e; }
+.Preparing { background: #5bc0de; }
+.Delivered { background: #5cb85c; }
+</style>
+</head>
+
+<body>
+
+<!-- FULL HEADER -->
+<header>
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <img src="img/logo.png" style="height:40px;">
+        </a>
+      </div>
+
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Order</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#" onclick="logoutAdmin()">Logout</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- DASHBOARD -->
+<div class="container">
+  <h2 class="mt-4">📦 Bistro Orders Dashboard</h2>
+  <p>Manage all customer orders here</p>
+
+  <div id="orders"></div>
+</div>
+
+<script>
+fetch("http://127.0.0.1:5000/admin/orders")
+.then(res => res.json())
+.then(data => {
+  let html = "";
+
+  data.forEach(o => {
+    html += `
+      <div class="order-card">
+        <h4>Order #${o.id}</h4>
+        <p><strong>Customer:</strong> ${o.name}</p>
+        <p><strong>Total:</strong> ₹${o.total}</p>
+
+        <span class="status-badge Pending">Pending</span>
+      </div>
+    `;
+  });
+
+  document.getElementById("orders").innerHTML = html;
+});
+
+function logoutAdmin(){
+  localStorage.removeItem("admin_logged_in");
+  window.location.href = "admin-login.html";
+}
+</script>
+
+</body>
+</html>
